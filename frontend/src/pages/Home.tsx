@@ -32,6 +32,7 @@ import {
 import { UserProfile } from '../components/UserProfile';
 import { UserRanking } from '../components/UserRanking';
 import { MultiversXService } from '../services/multiversx';
+import { ConnectWallet } from '../components/ConnectWallet';
 
 const service = new MultiversXService();
 
@@ -131,6 +132,20 @@ export const Home: React.FC = () => {
     }
   };
 
+  const handleConnect = async (walletName: string) => {
+    setLoading(true);
+    try {
+      // Simula uma conexão com delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      setIsConnected(true);
+      console.log(`Conectado com ${walletName}`);
+    } catch (error) {
+      console.error('Erro ao conectar:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <Box sx={{ 
       display: 'flex', 
@@ -158,13 +173,7 @@ export const Home: React.FC = () => {
               <AccountCircle />
             </IconButton>
           ) : (
-            <Button 
-              color="inherit" 
-              variant="outlined"
-              onClick={() => service.connect().then(setIsConnected)}
-            >
-              Conectar Carteira
-            </Button>
+            <ConnectWallet onConnect={handleConnect} isLoading={loading} />
           )}
         </Toolbar>
       </AppBar>
