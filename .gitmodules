@@ -1,0 +1,3 @@
+[submodule "NearX/playground/lib/forge-std"]
+	path = NearX/playground/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
